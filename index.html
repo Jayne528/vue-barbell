@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+    <meta property="og:title" content="">
+    <meta property="og:image" content="">
+    <meta property="og:description" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>barbell</title>
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="./js/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    isShow: false,
+                    isActive: false,
+                    isShowBtn: false,
+                    isActiveInput: false,
+                    count: 0,
+                    selected: 'A',
+                    options: [
+                        { text: 'Biathlon', value: 'A'},
+                        { text: 'Long Cycle', value: 'B'},
+                        { text: 'SNATCH', value: 'C'}
+                    ],
+                    minute_1: 0,
+                    minute_2: 0,
+                    seconds_1: 0,
+                    seconds_2: 0,
+                },
+                methods: {
+                    computeAdd() {
+                        this.count +=1
+                        
+                    }, 
+                    computeLess() {
+                        if(this.count>0) {
+                            this.count -=1
+                        }
+                    }, 
+                    startCountdown() {
+                        setTimeout(this.tick, 1000);
+                        if(this.minute_1 != 0 || this.minute_2 != 0 || this.seconds_1 != 0 || this.seconds_2 != 0) {
+                            this.isActive = true;
+                            this.isActiveInput = true;
+                            this.isShow = true;
+                        }
+                    },
+                    tick() {
+                        if(this.minute_1 != 0 || this.minute_2 != 0 || this.seconds_1 != 0 || this.seconds_2 != 0){
+                            this.seconds_2--;
+                            if(this.seconds_2 < 0){
+                                this.seconds_2 = 9;
+                                this.seconds_1--;
+                                if(this.seconds_1 < 0){
+                                    this.seconds_1 = 5;
+                                    this.minute_2--;
+                                    if(this.minute_2 < 0){
+                                        this.minute_2 = 9;
+                                        this.minute_1--;
+                                        if(this.minute_1 < 0){
+                                            this.minute_1 = 0;
+                                        }
+                                    }
+                                }
+                            }
+                            setTimeout(this.tick, 1000); 
+                        }else{
+                            this.isShow = false;
+                            this.isShowBtn = false;
+                            this.isActiveInput = false;
+                            this.isActive = false;
+                        }
+                    },
+                    ckeckLength(value) {
+                      
+                        if(value==this.minute_1) {
+                            if(value.length>1){
+                                this.minute_1 = value.slice(-1)
+                            }
+                            if(this.minute_1 == '') {
+                                this.minute_1 = 0
+                            }
+                        }
+                        if(value==this.minute_2) {
+                            if(value.length>1){
+                                this.minute_2 = value.slice(-1)
+                            }
+                            if(this.minute_2 == '') {
+                                this.minute_2 = 0
+                            }
+                        }
+                        if(value==this.seconds_1) {
+                            if(value.length>1){
+                                this.seconds_1 = value.slice(-1)
+                                if(this.seconds_1 > 5) {
+                                    this.seconds_1 = 5
+                                }
+                            }
+                            if(this.seconds_1 > 5) {
+                                this.seconds_1 = 5
+                            }
+                            if(this.seconds_1 == '') {
+                                this.seconds_1 = 0
+                            }
+                        }
+                        if(value==this.seconds_2) {
+                            if(value.length>1){
+                                this.seconds_2 = value.slice(-1)
+                            }
+                            if(this.seconds_2 == '') {
+                                this.seconds_2 = 0
+                            }
+                        }
+
+                        if(this.minute_1 > 0 || this.minute_2 > 0 || this.seconds_1 > 0 || this.seconds_2 > 0){
+                            this.isShowBtn = true;
+                        } else {
+                            this.isShowBtn = false;
+                        }
+                    }
+                },
+            })
+        });
+    </script>
+</head>
+<body>
+    <div id="app">
+        <div class="wrap">
+            <div class="playerProfile">
+                <div class="citizenship">
+                    <span>國籍：</span>
+                    <div class="flag">
+                        <img src="./img/taiwan.svg" alt=""><!-- todo 可變資料 -->
+                    </div>
+                </div>
+                <div class="player-name">
+                    <div class="name name-cn">
+                        <span>選手中文姓名：</span>
+                        <span>李大明</span>  <!-- todo 可變資料 -->
+                    </div>
+                    <div class="name name-en">
+                        <span>選手英文姓名：</span>
+                        <span>Li Da-Ming</span>  <!-- todo 可變資料 -->
+                    </div>
+                </div>
+            </div>
+            <div class="entryTime">
+                <div class="setTime" v-bind:class="{ active: isActiveInput }">
+                    <input v-model="minute_1" type="number" min="0" max="9" v-on:keyup ="ckeckLength(minute_1)">
+                    <input v-model="minute_2" type="number" min="0" max="9" v-on:keyup ="ckeckLength(minute_2)">
+                    <div class="colon"></div>
+                    <input v-model="seconds_1" type="number" min="0" max="5" v-on:keyup ="ckeckLength(seconds_1)">
+                    <input v-model="seconds_2" type="number" min="0" max="9" v-on:keyup ="ckeckLength(seconds_2)">
+                </div>
+                <div class="button start_btn" @click="startCountdown()" v-bind:class="{ active: isActive, show: isShowBtn}">開始</div>
+            </div>
+            <div class="countList">
+                <div class="count">{{count}}</div>
+                <div class="buttonSide">
+                    <div class="button countBtn less-btn" @click="computeLess()" v-bind:class="{ show: isShow }"></div>
+                    <div class="button countBtn add-btn" @click="computeAdd()" v-bind:class="{ show: isShow }"></div>
+                </div>
+            </div>
+            <div class="projectName">
+                <select v-model="selected">
+                    <option disabled>項目名稱</option>
+                    <option selected v-for="option in options" v-bind:value="option.value">{{ option.text }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

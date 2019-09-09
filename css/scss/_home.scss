@@ -1,0 +1,345 @@
+body {
+    background: #e5e9ec;
+    font-size: 1.4rem;
+    letter-spacing: 1.8px;
+    line-height: 150%;
+    color: #6f7b8a;
+}
+#app {
+    height: 100vh;
+    position: relative;
+}
+.wrap {
+    width: calc(100% - (40px));
+    max-width: 500px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.playerProfile {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5%;
+    text-align: center;
+}
+.citizenship {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 40%;
+    margin: 0 auto;
+}
+.flag {
+    width: 40%;
+    line-height: 0;
+    img {
+        width: 100%;
+    }
+}
+.player-name {
+    padding-top: 5%;
+}
+.name {
+    padding-top: 2%;
+}
+.entryTime {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 10%;
+}
+.setTime {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &.active {
+        pointer-events: none;
+        input {
+            border: 2px solid #dbe0e6;
+        }
+    }
+}
+.start_btn {
+    width: 50%;
+    padding: 1rem 0;
+    border-radius: 5px;
+    background-color: #8ccdae;
+    background: linear-gradient(#8ccdae, #6fa88d);
+    box-shadow: #c1e4d4 0 1px 0 inset;
+    border: 1px solid #5f9e80;
+    color: white;
+    text-shadow: #40936b 0 -1px 0;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    margin-top: 6%;
+    opacity: 0.5;
+    &:hover {
+        background-color: #5f9e80;
+        background: linear-gradient(#7ac5a1, #5f9e80);
+    }
+    &.active {
+        background-color: #ccccba;
+        background: linear-gradient(#e7e7df, #ccccba 50%, #b6b69d);
+        box-shadow: white 0 1px 0 inset;
+        border: 1px solid #abab8e;
+        color: white;
+        text-shadow: #a1a180 0 -1px 0;
+        box-shadow: #bbbba3 0 0.2em 0.4em inset;
+        border: solid 1px #abab8e;
+        pointer-events: none;
+    }
+    &.show {
+        opacity: 1;
+    }
+}
+.colon {
+    position: relative;
+    width: 4%;
+    padding-bottom: 15%;
+    &:before, &:after {
+        content: '';
+        width: 0.7rem;
+        height: 0.7rem;
+        background: #000;
+        border-radius: 50%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    &:before {
+        top: 5%;
+    }
+    &:after {
+        bottom: 5%;
+    }
+}
+input {
+    width: 20%;
+    appearance: none;
+    border: 0;
+    background: transparent;
+    font-size: 7rem;
+    text-align: center;
+    border: 2px solid #c0c9d4;
+    border-radius: 5px;
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    &:focus {
+        border: 2px solid #47525f;
+        color: #7a7e84;
+    }
+}
+.countList {
+    padding-top: 7%;
+}
+.count {
+    font-size: 6rem;
+    text-align: center;
+    line-height: 125%;
+    color: #000;
+}
+.buttonSide {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+}
+.countBtn {
+    border-radius: 8px;
+    background-color: #1b84b6;
+    background: linear-gradient(#3cace2, #1b84b6 70%);
+    box-shadow: #7ec8ec 0 1px 0 inset;
+    border: 1px solid #1874a0;
+    color: white;
+    text-shadow: #135f83 0 -1px 0;
+    box-shadow: #135d81 0 0.4em 0px, #49b2e4 0 1px 0 inset;
+    border-bottom: solid 1px #1b84b6;
+    width: 43%;
+    padding: 12% 0;
+    position: relative;
+    pointer-events: none;
+    opacity: 0.6;
+    &:before, &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &:active {
+        top: 0.3em;
+        box-shadow: #166a92 0 0.2em 0px;
+    }
+    &.show {
+        pointer-events: painted;
+        opacity: 1;
+    }
+}
+.less-btn {
+    &:before {
+        width: 38px;
+        height: 8px;
+        background: #fff;
+    }
+}
+.add-btn {
+    &:before {
+        width: 38px;
+        height: 8px;
+        background: #fff;
+    }
+    &:after {
+        width: 8px;
+        height: 38px;
+        background: #fff;
+    }
+}
+.projectName {
+    text-align: center;
+    width: 55%;
+    margin: 0 auto;
+    margin-top: 10%;
+    position: relative;
+    &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 5%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 7.5px 0 7.5px;
+        border-color: #000 transparent transparent transparent;
+    }
+}
+select {
+    width: 100%;
+    font-size: 2rem;
+    text-align: center;
+    appearance: none;
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    border-bottom: 1px solid #000;
+    padding-bottom: 1.5%;
+}
+
+
+
+
+
+@media (min-width: 768px) {
+    body {
+        font-size: 1.8rem;
+    }
+    .wrap {
+        max-width: 1200px;
+    }
+    .playerProfile {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .citizenship {
+        margin: 0;
+    }
+    .player-name {
+        padding-top: 0;
+        text-align: left;
+    }
+    .entryTime {
+        max-width: 400px;
+        padding-top: 60px;
+    }
+    .countList {
+        width: 75%;
+        max-width: 550px;
+        margin: 0 auto;
+        padding-top: 50px;
+    }
+    .start_btn {
+        margin-top: 10%;
+    }
+    .buttonSide {
+        padding-top: 7%;
+        width: 90%;
+    }
+    .countBtn {
+        width: 38%;
+        padding: 10% 0;
+    }
+    .projectName {
+        width: 30%;
+        max-width: 220px;
+        margin-top: 80px;
+    }
+}
+
+
+
+@media (min-width: 1200px) {
+    .playerProfile {
+        flex-direction: column;
+        width: 49%;
+        display: inline-block;
+        padding-top: 0;
+        vertical-align: middle;
+        padding-left: 5%;
+        box-sizing: border-box;
+    }
+    .name {
+        padding-top: 3%;
+    }
+    .citizenship {
+        justify-content: flex-start;
+    }
+    .setTime {
+        width: 60%;
+    }
+    .entryTime {
+        width: 50%;
+        display: inline-flex;
+        padding-top: 0;
+        align-items: center;
+        max-width: inherit;
+        vertical-align: middle;
+    }
+    .buttonSide {
+        width: 70%;
+    }
+    .countBtn {
+        width: 30%;
+        padding: 8% 0;
+    }
+    .less-btn {
+        &:before {
+            width: 18px;
+            height: 4px;
+        }
+    }
+    .add-btn {
+        &:before {
+            width: 18px;
+            height: 4px;
+        }
+        &:after {
+            width: 4px;
+            height: 18px;
+        }
+    }
+    .start_btn {
+        margin-top: 0;
+        width: 30%;
+    }
+    .countList {
+        padding-top: 100px;
+    }
+    .projectName {
+        margin-top: 100px;
+    }
+}
